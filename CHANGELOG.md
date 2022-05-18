@@ -1,0 +1,8 @@
+# Change Log
+
+### 0.0.1 (2022-05-16)
+
+#### Features
+
+- Collect information from weibo homepage, weibo chaohua, bilibili channel, and douyin tag for different items.
+- Store collected information in database tables.

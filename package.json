@@ -1,0 +1,14 @@
+{
+  "name": "web-info-collector",
+  "version": "0.0.1",
+  "description": "collect web info and store in database",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "node-fetch": "^3.2.4"
+  }
+}
