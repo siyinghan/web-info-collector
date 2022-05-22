@@ -36,9 +36,9 @@ CREATE TABLE `xxx` (
 
 ## Example
 
-| id   | create_time         | weibo_follower | weibo_friend | weibo_count | weibo_song             | weibo_yesterday                 | weibo_video          | chaohua_read | chaohua_count | chaohua_follower | bili_channel_archive_count | bili_channel_view_count | bili_channel_feature_count | bili_channel_subscription | douyin_ch_user_count | douyin_ch_view_count |
-| ---- | ------------------- | -------------- | ------------ | ----------- | ---------------------- | ------------------------------- | -------------------- | ------------ | ------------- | ---------------- | -------------------------- | ----------------------- | -------------------------- | ------------------------- | -------------------- | -------------------- |
-| 1    | 2022-05-15 23:05:40 | 33468417       | 165          | 678         | 亚洲新歌榜 内地榜 No.4 | 昨日阅读人数100万+，互动数4.3万 | 视频累计播放量4.16亿 | 阅读324.9亿  | 990769        | 粉丝551.5万      | 8.2万                      | 14.4亿                  | 775                        | 75679                     | 500047               | 26962922191          |
+| id  | create_time         | weibo_follower | weibo_friend | weibo_count | weibo_song             | weibo_yesterday                     | weibo_video            | chaohua_read  | chaohua_count | chaohua_follower | bili_channel_archive_count | bili_channel_view_count | bili_channel_feature_count | bili_channel_subscription | douyin_ch_user_count | douyin_ch_view_count |
+| --- | ------------------- | -------------- | ------------ | ----------- | ---------------------- | ----------------------------------- | ---------------------- | ------------- | ------------- | ---------------- | -------------------------- | ----------------------- | -------------------------- | ------------------------- | -------------------- | -------------------- |
+| 1   | 2022-05-15 23:05:40 | 33468417       | 165          | 678         | 亚洲新歌榜 内地榜 No.4 | 昨日阅读人数 100 万+，互动数 4.3 万 | 视频累计播放量 4.16 亿 | 阅读 324.9 亿 | 990769        | 粉丝 551.5 万    | 8.2 万                     | 14.4 亿                 | 775                        | 75679                     | 500047               | 26962922191          |
 
 ## Cookie
 
