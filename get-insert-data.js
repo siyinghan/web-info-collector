@@ -8,6 +8,12 @@ export const getAllData = async (
   douyin_cid
 ) => {
   let allData = {};
+  // insert current date
+  const date = new Date();
+  allData['year'] = date.getFullYear();
+  allData['month'] = date.getMonth() + 1;
+  allData['day'] = date.getDate();
+  // insert web info
   allData['name_id'] = name_id;
   const weiboUserInfo = await getWeiboUserInfo(weibo_uid);
   const weiboUserDetail = await getWeiboUserDetail(weibo_uid);

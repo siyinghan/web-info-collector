@@ -11,9 +11,9 @@ export class WebInfoCollector {
     const weiboChaohuaInfo = await this.getWeiboChaohuaInfo(
       items[item].weibo_containerid
     );
-    let biliChanneInfo = {};
+    let biliChannelInfo = {};
     if (items[item].bili_channel_id) {
-      biliChanneInfo = await this.getBiliChanneInfo(
+      biliChannelInfo = await this.getBiliChannelInfo(
         items[item].bili_channel_id
       );
     }
@@ -92,7 +92,7 @@ export class WebInfoCollector {
     };
   }
 
-  async getBiliChanneInfo(channel_id) {
+  async getBiliChannelInfo(channel_id) {
     const url =
       'https://api.bilibili.com/x/web-interface/web/channel/detail?channel_id=' +
       channel_id;

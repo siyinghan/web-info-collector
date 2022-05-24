@@ -5,6 +5,7 @@
 #### Features
 
 - Refactor database.
+- Test if the request info belong to the item.
 
 ### 0.0.1 (2022-05-16)
 
