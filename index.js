@@ -1,25 +1,37 @@
+import util from 'util';
 import mysql from 'mysql';
-import { WebInfoCollector } from './web-info-collector.js';
-import { items } from './request-info.js';
+import { mysqlConfig } from './mysql-config.js';
+import { getAllData } from './get-insert-data.js';
 
-const connection = mysql.createConnection({
-  user: 'root',
-  host: '192.168.1.100',
-  database: 'web_info',
-  password: 'Admin1234!',
+const connection = mysql.createConnection(mysqlConfig);
+const queryMySQL = util.promisify(connection.query).bind(connection);
+
+const sqlGetRequestInfo = 'SELECT * FROM request_info';
+const requesInfoRaw = await queryMySQL(sqlGetRequestInfo);
+
+let requesInfo = {};
+requesInfoRaw.forEach((item) => {
+  const { name_id, weibo_uid, weibo_containerid, bili_channel_id, douyin_cid } =
+    item;
+  requesInfo[name_id] = {
+    weibo_uid: weibo_uid,
+    weibo_containerid: weibo_containerid,
+    bili_channel_id: bili_channel_id,
+    douyin_cid: douyin_cid,
+  };
 });
 
-for (let item in items) {
-  const sqlStr = 'INSERT INTO ' + item + ' SET ?';
-  const insert_data = await new WebInfoCollector().webInfoCombine(item);
-  console.log(item);
-  console.log(insert_data);
-  connection.query(sqlStr, insert_data, (err, results) => {
-    if (err) throw err;
-    if (results.affectedRows === 1) {
-      console.log('success');
-    }
-  });
+for (let item in requesInfo) {
+  const sqlInsertData = 'INSERT INTO web_data SET ?';
+  const insertData = await getAllData(
+    parseInt(item),
+    requesInfo[item]['weibo_uid'],
+    requesInfo[item]['weibo_containerid'],
+    requesInfo[item]['bili_channel_id'],
+    requesInfo[item]['douyin_cid']
+  );
+  console.log(insertData);
+  queryMySQL(sqlInsertData, insertData);
 }
 
 connection.end();

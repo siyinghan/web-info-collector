@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.0.2 (2022-05-25)
+
+#### Features
+
+- Refactor database.
+
 ### 0.0.1 (2022-05-16)
 
 #### Features
