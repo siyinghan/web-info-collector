@@ -88,12 +88,13 @@ const getWeiboChaohuaInfo = async (containerid) => {
     response.json()
   );
   return {
-    chaohua_read:
-      weibo_chaohua_response.data.pageInfo.desc_more[0].split('\u3000')[0],
+    chaohua_read_yi: weibo_chaohua_response.data.pageInfo.desc_more[0]
+      .split('\u3000')[0]
+      .match(/[0-9.]+/)[0],
     chaohua_count: weibo_chaohua_response.data.pageInfo.total,
-    chaohua_follower:
-      weibo_chaohua_response.data.pageInfo.desc_more[0].split('\u3000')[2],
-    // Number(JSON.stringify(weibo_chaohua_response).match(/"content2":"([0-9]+)/)[1]),
+    chaohua_follower_wan: weibo_chaohua_response.data.pageInfo.desc_more[0]
+      .split('\u3000')[2]
+      .match(/[0-9.]+/)[0],
   };
 };
 
@@ -105,8 +106,10 @@ const getBiliChanneInfo = async (channel_id) => {
     response.json()
   );
   return {
-    bili_channel_archive_count: bili_channel_response.data.archive_count,
-    bili_channel_view_count: bili_channel_response.data.view_count,
+    bili_channel_archive_count_wan:
+      bili_channel_response.data.archive_count.match(/[0-9.]+/)[0],
+    bili_channel_view_count_yi:
+      bili_channel_response.data.view_count.match(/[0-9.]+/)[0],
     bili_channel_feature_count: bili_channel_response.data.featured_count,
     bili_channel_subscription: bili_channel_response.data.subscribed_count,
   };
