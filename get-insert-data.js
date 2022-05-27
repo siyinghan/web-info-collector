@@ -73,7 +73,7 @@ const getWeiboUserDetail = async (uid) => {
     } else if (detail['name'].indexOf('昨日') !== -1) {
       weibo_detail['weibo_yesterday'] = detail['name'];
     } else if (detail['name'].indexOf('视频') !== -1) {
-      weibo_detail['weibo_video'] = detail['name'];
+      weibo_detail['weibo_video'] = detail['name'].match(/[0-9].+/)[0];
     }
   });
   return weibo_detail;
