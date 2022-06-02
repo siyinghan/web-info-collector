@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.0.3 (2022-06-02)
+
+#### Features
+
+- Add mysql local config.
+
 ### 0.0.2 (2022-05-25)
 
 #### Features
