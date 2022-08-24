@@ -1,5 +1,15 @@
 # Change Log
 
+### 0.0.4 (2022-08-24)
+
+#### Features
+
+- Add request info checking.
+
+#### Bug Fixes
+
+- Fix unique key in table request_info.
+
 ### 0.0.3 (2022-06-02)
 
 #### Features

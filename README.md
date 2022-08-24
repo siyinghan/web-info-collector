@@ -8,6 +8,8 @@ Run `node index.js` to execute the code.
 
 Data will be stored in the MySQL table.
 
+Run `node check-request-info-id.js` to check if the request info in the request_info table is correct.
+
 ## MySQL table
 
 #### request_info
@@ -21,6 +23,8 @@ CREATE TABLE `request_info` (
   `bili_channel_id` int(11) DEFAULT NULL,
   `douyin_cid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`name_id`)
+  UNIQUE KEY `name_id` (`name_id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
