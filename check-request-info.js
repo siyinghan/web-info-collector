@@ -22,7 +22,7 @@ requesInfoRaw.forEach((item) => {
 });
 
 for (let item in requesInfo) {
-  const weibo_uid = await fetch(
+  const weibo_home_info = await fetch(
     'https://weibo.com/ajax/profile/info?uid=' + requesInfo[item]['weibo_uid'],
     {
       method: 'GET',
@@ -32,28 +32,31 @@ for (let item in requesInfo) {
       },
     }
   ).then((response) => response.json());
-  const weibo_containerid = await fetch(
+  const weibo_chaohua_info = await fetch(
     'https://m.weibo.cn/api/container/getIndex?extparam=%E9%BE%9A%E4%BF%8A&containerid=' +
       requesInfo[item]['weibo_containerid'] +
       '&luicode=10000011&lfid=100103type%3D401%26t%3D10%26q%3D%E9%BE%9A%E4%BF%8A'
   ).then((response) => response.json());
-  const bili_channel_id = await fetch(
+  const bili_channel_info = await fetch(
     'https://api.bilibili.com/x/web-interface/web/channel/detail?channel_id=' +
       requesInfo[item]['bili_channel_id']
   ).then((response) => response.json());
-  const douyin_cid = await fetch(
+  const douyin_ch_info = await fetch(
     'https://www.iesdouyin.com/web/api/v2/challenge/info/?ch_id=' +
       requesInfo[item]['douyin_cid']
   ).then((response) => response.json());
+
+  // extract name information of every response and add into one dictionary to check
   let nameToBeChecked = {};
   nameToBeChecked['name_id'] = item;
-  nameToBeChecked['weibo_uid'] = weibo_uid['data']['user']['screen_name'];
-  nameToBeChecked['weibo_containerid'] =
-    weibo_containerid['data']['pageInfo']['title_top'];
-  if (requesInfo[item]['bili_channel_id']) {
-    nameToBeChecked['bili_channel_id'] = bili_channel_id['data']['name'];
+  nameToBeChecked['weibo_home_info'] =
+    weibo_home_info['data']['user']['screen_name'];
+  nameToBeChecked['weibo_chaohua_info'] =
+    weibo_chaohua_info['data']['pageInfo']['title_top'];
+  if (requesInfo[item]['bili_channel_info']) {
+    nameToBeChecked['bili_channel_info'] = bili_channel_info['data']['name'];
   }
-  nameToBeChecked['douyin_cid'] = douyin_cid['ch_info']['cha_name'];
+  nameToBeChecked['douyin_ch_info'] = douyin_ch_info['ch_info']['cha_name'];
   console.log(nameToBeChecked);
 }
 
