@@ -4,11 +4,14 @@
 
 Run `npm install` to install dependencies.
 
-Run `node index.js` to execute the code.
+Run `node index.js` to collect information.
 
-Data will be stored in the MySQL table.
+- Use mysqlConfig from `./mysql-config-local.js` when running the code in local.
+- Use mysqlConfig from `./mysql-config-server.js` when running the code in server.
 
-Run `node check-request-info-id.js` to check if the request info in the request_info table is correct.
+The tables in MySQL need to be created before running the code. And the collected data will be stored in the corresponding tables.
+
+Run `node check-request-info.js` to check if the request info in the request_info table is correct.
 
 ## MySQL table
 
