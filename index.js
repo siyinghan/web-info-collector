@@ -29,17 +29,19 @@ requesInfoRaw.forEach((item) => {
 });
 
 for (let item in requesInfo) {
-  const sqlInsertData = 'INSERT INTO web_data SET ?';
-  const insertData = await getAllData(
-    parseInt(item),
-    requesInfo[item]['name'],
-    requesInfo[item]['weibo_uid'],
-    requesInfo[item]['weibo_containerid'],
-    requesInfo[item]['bili_channel_id'],
-    requesInfo[item]['douyin_cid']
-  );
-  console.log(insertData);
-  queryMySQL(sqlInsertData, insertData);
+  if (item > 0) {
+    const sqlInsertData = 'INSERT INTO web_data SET ?';
+    const insertData = await getAllData(
+      parseInt(item),
+      requesInfo[item]['name'],
+      requesInfo[item]['weibo_uid'],
+      requesInfo[item]['weibo_containerid'],
+      requesInfo[item]['bili_channel_id'],
+      requesInfo[item]['douyin_cid']
+    );
+    console.log(insertData);
+    queryMySQL(sqlInsertData, insertData);
+  }
 }
 
 connection.end();
