@@ -1,18 +1,15 @@
 import fetch from 'node-fetch';
+import { value_save } from './value.js';
 
 export const getAllData = async (
   name_id,
+  name,
   weibo_uid,
   weibo_containerid,
   bili_channel_id,
   douyin_cid
 ) => {
   let allData = {};
-  // insert current date
-  const date = new Date();
-  allData['year'] = date.getFullYear();
-  allData['month'] = date.getMonth() + 1;
-  allData['day'] = date.getDate();
   // insert web info
   allData['name_id'] = name_id;
   const weiboUserInfo = await getWeiboUserInfo(weibo_uid);
@@ -23,6 +20,7 @@ export const getAllData = async (
     biliChanneInfo = await getBiliChanneInfo(bili_channel_id);
   }
   const douyinTagInfo = await getDouyinTagInfo(douyin_cid);
+  const baiduIndex7days = await getBaiduIndex7days(name);
   for (let info in weiboUserInfo) {
     allData[info] = weiboUserInfo[info];
   }
@@ -38,16 +36,17 @@ export const getAllData = async (
   for (let info in douyinTagInfo) {
     allData[info] = douyinTagInfo[info];
   }
+  for (let info in baiduIndex7days) {
+    allData[info] = baiduIndex7days[info];
+  }
   return allData;
 };
 
 const getWeiboUserInfo = async (uid) => {
   const url = 'https://weibo.com/ajax/profile/info?uid=' + uid;
   const weibo_info_response = await fetch(url, {
-    method: 'GET',
     headers: {
-      Cookie:
-        'PC_TOKEN=a37ab312d2; SUB=_2AkMV1v-Ff8NxqwFRmP8VyWPhZYl_zA7EieKjig5eJRMxHRl-yT92qkEStRB6PlbRanatp6A8fTCaEbx4c9Y9c8gE09xW; SUBP=0033WrSXqPxfM72-Ws9jqgMF55529P9D9WFJ_4rAXyYkIU2ZRHPn0nJ6; XSRF-TOKEN=ng6zLcS3sAs9V7vtEZb03wCm; WBPSESS=dg5zs_KFY81p0FnDKmb34beZzdP0zt_lcZBtw2BztAtpHEm1lxohB65MR21jldoxxdt-irfjq1wUPI6B-rhWgCWaHOc5XFKMmmUbvkKtkpo97c_LbCmMUV1MA18W47_1oOIFV5KOi6XdjXdzDm4w-SgD5HDS0506yRpUIv2bEeM=',
+      Cookie: value_save['weibo_home_cookie'],
     },
   }).then((response) => response.json());
   return {
@@ -60,10 +59,8 @@ const getWeiboUserInfo = async (uid) => {
 const getWeiboUserDetail = async (uid) => {
   const url = 'https://weibo.com/ajax/profile/detail?uid=' + uid;
   const weibo_detail_response = await fetch(url, {
-    method: 'GET',
     headers: {
-      Cookie:
-        'PC_TOKEN=a37ab312d2; SUB=_2AkMV1v-Ff8NxqwFRmP8VyWPhZYl_zA7EieKjig5eJRMxHRl-yT92qkEStRB6PlbRanatp6A8fTCaEbx4c9Y9c8gE09xW; SUBP=0033WrSXqPxfM72-Ws9jqgMF55529P9D9WFJ_4rAXyYkIU2ZRHPn0nJ6; XSRF-TOKEN=ng6zLcS3sAs9V7vtEZb03wCm; WBPSESS=dg5zs_KFY81p0FnDKmb34beZzdP0zt_lcZBtw2BztAtpHEm1lxohB65MR21jldoxxdt-irfjq1wUPI6B-rhWgCWaHOc5XFKMmmUbvkKtkpo97c_LbCmMUV1MA18W47_1oOIFV5KOi6XdjXdzDm4w-SgD5HDS0506yRpUIv2bEeM=',
+      Cookie: value_save['weibo_home_cookie'],
     },
   }).then((response) => response.json());
   let weibo_detail = {};
@@ -124,5 +121,23 @@ const getDouyinTagInfo = async (cid) => {
   return {
     douyin_ch_user_count: douyin_tag_response.ch_info.user_count,
     douyin_ch_view_count: douyin_tag_response.ch_info.view_count,
+  };
+};
+
+const getBaiduIndex7days = async (name) => {
+  const url =
+    'https://index.baidu.com/api/SearchApi/index?area=0&word=[[%7B%22name%22:%22' +
+    encodeURI(name) +
+    '%22,%22wordType%22:1%7D]]&days=7';
+  const baidu_index_response = await fetch(url, {
+    headers: {
+      Cookie: value_save['baidu_index_cookie'],
+      'Cipher-Text': value_save['baidu_index_cipher_text'],
+    },
+  }).then((response) => response.json());
+  return {
+    baidu_index_7days_all: baidu_index_response.data.generalRatio[0].all.avg,
+    baidu_index_7days_pc: baidu_index_response.data.generalRatio[0].pc.avg,
+    baidu_index_7days_wise: baidu_index_response.data.generalRatio[0].wise.avg,
   };
 };

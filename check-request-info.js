@@ -2,6 +2,7 @@ import util from 'util';
 import mysql from 'mysql';
 import fetch from 'node-fetch';
 import { mysqlConfig } from './mysql-config-local.js';
+import { value_save } from './value.js';
 
 const connection = mysql.createConnection(mysqlConfig);
 const queryMySQL = util.promisify(connection.query).bind(connection);
@@ -11,9 +12,16 @@ const requesInfoRaw = await queryMySQL(sqlGetRequestInfo);
 
 let requesInfo = {};
 requesInfoRaw.forEach((item) => {
-  const { name_id, weibo_uid, weibo_containerid, bili_channel_id, douyin_cid } =
-    item;
+  const {
+    name_id,
+    name,
+    weibo_uid,
+    weibo_containerid,
+    bili_channel_id,
+    douyin_cid,
+  } = item;
   requesInfo[name_id] = {
+    name: name,
     weibo_uid: weibo_uid,
     weibo_containerid: weibo_containerid,
     bili_channel_id: bili_channel_id,
@@ -25,10 +33,8 @@ for (let item in requesInfo) {
   const weibo_home_info = await fetch(
     'https://weibo.com/ajax/profile/info?uid=' + requesInfo[item]['weibo_uid'],
     {
-      method: 'GET',
       headers: {
-        Cookie:
-          'PC_TOKEN=a37ab312d2; SUB=_2AkMV1v-Ff8NxqwFRmP8VyWPhZYl_zA7EieKjig5eJRMxHRl-yT92qkEStRB6PlbRanatp6A8fTCaEbx4c9Y9c8gE09xW; SUBP=0033WrSXqPxfM72-Ws9jqgMF55529P9D9WFJ_4rAXyYkIU2ZRHPn0nJ6; XSRF-TOKEN=ng6zLcS3sAs9V7vtEZb03wCm; WBPSESS=dg5zs_KFY81p0FnDKmb34beZzdP0zt_lcZBtw2BztAtpHEm1lxohB65MR21jldoxxdt-irfjq1wUPI6B-rhWgCWaHOc5XFKMmmUbvkKtkpo97c_LbCmMUV1MA18W47_1oOIFV5KOi6XdjXdzDm4w-SgD5HDS0506yRpUIv2bEeM=',
+        Cookie: value_save['weibo_home_cookie'],
       },
     }
   ).then((response) => response.json());
@@ -45,6 +51,17 @@ for (let item in requesInfo) {
     'https://www.iesdouyin.com/web/api/v2/challenge/info/?ch_id=' +
       requesInfo[item]['douyin_cid']
   ).then((response) => response.json());
+  const baidu_index_7days_info = await fetch(
+    'https://index.baidu.com/api/SearchApi/index?area=0&word=[[%7B%22name%22:%22' +
+      encodeURI(requesInfo[item]['name']) +
+      '%22,%22wordType%22:1%7D]]&days=7',
+    {
+      headers: {
+        Cookie: value_save['baidu_index_cookie'],
+        'Cipher-Text': value_save['baidu_index_cipher_text'],
+      },
+    }
+  ).then((response) => response.json());
 
   // extract name information of every response and add into one dictionary to check
   let nameToBeChecked = {};
@@ -57,6 +74,8 @@ for (let item in requesInfo) {
     nameToBeChecked['bili_channel_info'] = bili_channel_info['data']['name'];
   }
   nameToBeChecked['douyin_ch_info'] = douyin_ch_info['ch_info']['cha_name'];
+  nameToBeChecked['baidu_index_7days_info'] =
+    baidu_index_7days_info['data']['userIndexes'][0]['word'][0]['name'];
   console.log(nameToBeChecked);
 }
 
