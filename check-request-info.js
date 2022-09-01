@@ -1,7 +1,7 @@
 import util from 'util';
 import mysql from 'mysql';
 import fetch from 'node-fetch';
-import { mysqlConfig } from './mysql-config-local.js';
+import { mysqlConfig } from './mysql-config/mysql-config-local.js';
 import { value_save } from './value.js';
 
 const connection = mysql.createConnection(mysqlConfig);

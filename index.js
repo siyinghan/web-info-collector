@@ -1,6 +1,6 @@
 import util from 'util';
 import mysql from 'mysql';
-import { mysqlConfig } from './mysql-config-server.js';
+import { mysqlConfig } from './mysql-config/mysql-config-server.js';
 import { getAllData } from './get-insert-data.js';
 
 const connection = mysql.createConnection(mysqlConfig);
