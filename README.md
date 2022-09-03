@@ -53,9 +53,6 @@ CREATE TABLE `web_data` (
   `bili_channel_subscription` int(11) DEFAULT NULL,
   `douyin_ch_user_count` int(11) DEFAULT NULL,
   `douyin_ch_view_count` bigint(20) DEFAULT NULL,
-  `baidu_index_7days_all` int(11) DEFAULT NULL,
-  `baidu_index_7days_pc` int(11) DEFAULT NULL,
-  `baidu_index_7days_wise` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```

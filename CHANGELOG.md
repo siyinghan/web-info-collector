@@ -5,7 +5,6 @@
 #### Features
 
 - Add request info checking.
-- Add Baidu Index.
 - Remove current date insertion.
 - Add matplotlib visualization.
 

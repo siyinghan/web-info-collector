@@ -51,17 +51,6 @@ for (let item in requesInfo) {
     'https://www.iesdouyin.com/web/api/v2/challenge/info/?ch_id=' +
       requesInfo[item]['douyin_cid']
   ).then((response) => response.json());
-  const baidu_index_7days_info = await fetch(
-    'https://index.baidu.com/api/SearchApi/index?area=0&word=[[%7B%22name%22:%22' +
-      encodeURI(requesInfo[item]['name']) +
-      '%22,%22wordType%22:1%7D]]&days=7',
-    {
-      headers: {
-        Cookie: value_save['baidu_index_cookie'],
-        'Cipher-Text': value_save['baidu_index_cipher_text'],
-      },
-    }
-  ).then((response) => response.json());
 
   // extract name information of every response and add into one dictionary to check
   let nameToBeChecked = {};
@@ -74,8 +63,6 @@ for (let item in requesInfo) {
     nameToBeChecked['bili_channel_info'] = bili_channel_info['data']['name'];
   }
   nameToBeChecked['douyin_ch_info'] = douyin_ch_info['ch_info']['cha_name'];
-  nameToBeChecked['baidu_index_7days_info'] =
-    baidu_index_7days_info['data']['userIndexes'][0]['word'][0]['name'];
   console.log(nameToBeChecked);
 }
 

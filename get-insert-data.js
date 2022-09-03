@@ -3,7 +3,6 @@ import { value_save } from './value.js';
 
 export const getAllData = async (
   name_id,
-  name,
   weibo_uid,
   weibo_containerid,
   bili_channel_id,
@@ -20,7 +19,6 @@ export const getAllData = async (
     biliChanneInfo = await getBiliChanneInfo(bili_channel_id);
   }
   const douyinTagInfo = await getDouyinTagInfo(douyin_cid);
-  const baiduIndex7days = await getBaiduIndex7days(name);
   for (let info in weiboUserInfo) {
     allData[info] = weiboUserInfo[info];
   }
@@ -35,9 +33,6 @@ export const getAllData = async (
   }
   for (let info in douyinTagInfo) {
     allData[info] = douyinTagInfo[info];
-  }
-  for (let info in baiduIndex7days) {
-    allData[info] = baiduIndex7days[info];
   }
   return allData;
 };
@@ -121,23 +116,5 @@ const getDouyinTagInfo = async (cid) => {
   return {
     douyin_ch_user_count: douyin_tag_response.ch_info.user_count,
     douyin_ch_view_count: douyin_tag_response.ch_info.view_count,
-  };
-};
-
-const getBaiduIndex7days = async (name) => {
-  const url =
-    'https://index.baidu.com/api/SearchApi/index?area=0&word=[[%7B%22name%22:%22' +
-    encodeURI(name) +
-    '%22,%22wordType%22:1%7D]]&days=7';
-  const baidu_index_response = await fetch(url, {
-    headers: {
-      Cookie: value_save['baidu_index_cookie'],
-      'Cipher-Text': value_save['baidu_index_cipher_text'],
-    },
-  }).then((response) => response.json());
-  return {
-    baidu_index_7days_all: baidu_index_response.data.generalRatio[0].all.avg,
-    baidu_index_7days_pc: baidu_index_response.data.generalRatio[0].pc.avg,
-    baidu_index_7days_wise: baidu_index_response.data.generalRatio[0].wise.avg,
   };
 };
