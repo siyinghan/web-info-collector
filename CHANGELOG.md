@@ -1,5 +1,18 @@
 # Change Log
 
+### 0.0.4 (2022-09-02)
+
+#### Features
+
+- Add request info checking.
+- Add Baidu Index.
+- Remove current date insertion.
+- Add matplotlib visualization.
+
+#### Bug Fixes
+
+- Fix unique key in table request_info.
+
 ### 0.0.3 (2022-06-02)
 
 #### Features
