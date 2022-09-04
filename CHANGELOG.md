@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.0.5 (2022-09-04)
+
+#### Features
+
+- Update plots showing function.
+
 ### 0.0.4 (2022-09-02)
 
 #### Features
