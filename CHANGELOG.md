@@ -1,5 +1,13 @@
 # Change Log
 
+### 0.0.5 (2022-09-14)
+
+#### Features
+
+- Update plots showing function.
+- Add weibo V index and update plots of V index graph.
+- Add status column for request_info table.
+
 ### 0.0.4 (2022-09-02)
 
 #### Features

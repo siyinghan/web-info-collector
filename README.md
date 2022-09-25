@@ -25,6 +25,7 @@ CREATE TABLE `request_info` (
   `weibo_containerid` varchar(45) DEFAULT NULL,
   `bili_channel_id` int(11) DEFAULT NULL,
   `douyin_cid` bigint(20) DEFAULT NULL,
+  `status` int(1) DEFAULT 1,
   PRIMARY KEY (`name_id`)
   UNIQUE KEY `name_id` (`name_id`),
   UNIQUE KEY `name` (`name`)
@@ -41,6 +42,7 @@ CREATE TABLE `web_data` (
   `weibo_follower` int(11) DEFAULT NULL,
   `weibo_friend` int(11) DEFAULT NULL,
   `weibo_count` int(11) DEFAULT NULL,
+  `v_index_wenyu` float(5,2) DEFAULT NULL,
   `weibo_song` varchar(45) DEFAULT NULL,
   `weibo_yesterday` varchar(45) DEFAULT NULL,
   `weibo_video` varchar(45) DEFAULT NULL,
