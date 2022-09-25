@@ -60,7 +60,9 @@ const getWeiboUserDetail = async (uid) => {
   }).then((response) => response.json());
   let weibo_detail = {};
   weibo_detail_response.data.label_desc.forEach((detail) => {
-    if (detail['name'].indexOf('歌') !== -1) {
+    if (detail['name'].indexOf('V指数 文娱') !== -1) {
+      weibo_detail['v_index_wenyu'] = detail['name'].match(/[0-9.]+/)[0];
+    } else if (detail['name'].indexOf('歌') !== -1) {
       weibo_detail['weibo_song'] = detail['name'];
     } else if (detail['name'].indexOf('昨日') !== -1) {
       weibo_detail['weibo_yesterday'] = detail['name'];
@@ -68,6 +70,9 @@ const getWeiboUserDetail = async (uid) => {
       weibo_detail['weibo_video'] = detail['name'].match(/[0-9].+/)[0];
     }
   });
+  if (Object.keys(weibo_detail).length === 0) {
+    throw new Error('connection error to weibo details');
+  }
   return weibo_detail;
 };
 
