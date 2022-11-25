@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.0.6 (2022-11-25)
+
+- Update the funtion of getting "chaohua_count_wan" (the old value cannot be found anymore).
+
 ### 0.0.5 (2022-09-14)
 
 #### Features

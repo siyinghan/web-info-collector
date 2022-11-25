@@ -1,6 +1,6 @@
 {
   "name": "web-info-collector",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "collect web info and store in database",
   "main": "index.js",
   "type": "module",

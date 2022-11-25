@@ -88,7 +88,9 @@ const getWeiboChaohuaInfo = async (containerid) => {
     chaohua_read_yi: weibo_chaohua_response.data.pageInfo.desc_more[0]
       .split('\u3000')[0]
       .match(/[0-9.]+/)[0],
-    chaohua_count: weibo_chaohua_response.data.pageInfo.total,
+    chaohua_count_wan: weibo_chaohua_response.data.pageInfo.desc_more[0]
+      .split('\u3000')[1]
+      .match(/[0-9.]+/)[0],
     chaohua_follower_wan: weibo_chaohua_response.data.pageInfo.desc_more[0]
       .split('\u3000')[2]
       .match(/[0-9.]+/)[0],
