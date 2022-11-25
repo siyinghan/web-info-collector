@@ -47,7 +47,7 @@ CREATE TABLE `web_data` (
   `weibo_yesterday` varchar(45) DEFAULT NULL,
   `weibo_video` varchar(45) DEFAULT NULL,
   `chaohua_read_yi` float(8,1) DEFAULT NULL,
-  `chaohua_count` int(11) DEFAULT NULL,
+  `chaohua_count_wan` float(8,1) DEFAULT NULL,
   `chaohua_follower_wan` float(8,1) DEFAULT NULL,
   `bili_channel_archive_count_wan` float(8,1) DEFAULT NULL,
   `bili_channel_view_count_yi` float(8,1) DEFAULT NULL,
