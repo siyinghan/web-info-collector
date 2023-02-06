@@ -1,6 +1,6 @@
 # Web Info Collector
 
-## Getting Started
+## Quickstart
 
 Run `npm install` to install dependencies.
 
