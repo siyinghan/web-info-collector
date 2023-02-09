@@ -1,6 +1,6 @@
 # Web Info Collector
 
-## Getting Started
+## Quickstart
 
 Run `npm install` to install dependencies.
 
@@ -9,13 +9,14 @@ Run `node index.js` to collect information.
 - Use mysqlConfig from `./mysql-config-local.js` when running the code in local.
 - Use mysqlConfig from `./mysql-config-server.js` when running the code in server.
 
-The tables in MySQL need to be created before running the code. And the collected data will be stored in the corresponding tables.
+The tables in MySQL need to be created before running the code. And the collected data will be stored in the
+corresponding tables.
 
 Run `node check-request-info.js` to check if the request info in the request_info table is correct.
 
 ## MySQL table
 
-#### request_info
+**request_info**
 
 ```mysql
 CREATE TABLE `request_info` (
@@ -32,7 +33,7 @@ CREATE TABLE `request_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-#### web_data
+**web_data**
 
 ```mysql
 CREATE TABLE `web_data` (

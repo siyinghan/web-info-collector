@@ -1,8 +1,17 @@
 # Change Log
 
+### 0.0.7 (2023-02-05)
+
+#### Bug Fixes
+
+- Ignore inactive (status 0) items when checking request info.
+- Fix spelling errors.
+
 ### 0.0.6 (2022-11-25)
 
-- Update the funtion of getting "chaohua_count_wan" (the old value cannot be found anymore).
+#### Bug Fixes
+
+- Update the function of getting "chaohua_count_wan" (the old value cannot be found anymore).
 
 ### 0.0.5 (2022-09-14)
 

@@ -1,6 +1,9 @@
 # system files
 .DS_Store
 
+# IntelliJ IDEA
+.idea
+
 # npm
 node_modules/
 package-lock.json

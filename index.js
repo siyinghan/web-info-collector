@@ -7,10 +7,10 @@ const connection = mysql.createConnection(mysqlConfig);
 const queryMySQL = util.promisify(connection.query).bind(connection);
 
 const sqlGetRequestInfo = 'SELECT * FROM request_info';
-const requesInfoRaw = await queryMySQL(sqlGetRequestInfo);
+const requestInfoRaw = await queryMySQL(sqlGetRequestInfo);
 
-let requesInfo = {};
-requesInfoRaw.forEach((item) => {
+let requestInfo = {};
+requestInfoRaw.forEach((item) => {
   const {
     name_id,
     weibo_uid,
@@ -19,7 +19,7 @@ requesInfoRaw.forEach((item) => {
     douyin_cid,
     status,
   } = item;
-  requesInfo[name_id] = {
+  requestInfo[name_id] = {
     status: status,
     weibo_uid: weibo_uid,
     weibo_containerid: weibo_containerid,
@@ -28,17 +28,17 @@ requesInfoRaw.forEach((item) => {
   };
 });
 
-for (let item in requesInfo) {
+for (let item in requestInfo) {
   // check if the status is 1 (0 means this item is inactive)
   // change the number after "item >" to restart the project right after where it stopped
-  if (requesInfo[item]['status'] === 1 && item > 0) {
+  if (requestInfo[item]['status'] === 1 && item > 0) {
     const sqlInsertData = 'INSERT INTO web_data SET ?';
     const insertData = await getAllData(
       parseInt(item),
-      requesInfo[item]['weibo_uid'],
-      requesInfo[item]['weibo_containerid'],
-      requesInfo[item]['bili_channel_id'],
-      requesInfo[item]['douyin_cid']
+      requestInfo[item]['weibo_uid'],
+      requestInfo[item]['weibo_containerid'],
+      requestInfo[item]['bili_channel_id'],
+      requestInfo[item]['douyin_cid']
     );
     console.log(insertData);
     queryMySQL(sqlInsertData, insertData);
